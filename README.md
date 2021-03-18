@@ -1,4 +1,3 @@
-# planck-keymap
 
 This repository contains my [planck light](https://drop.com/buy/massdrop-x-olkb-planck-light-mechanical-keyboard) keymap.
 
@@ -9,4 +8,4 @@ git submodule add https://github.com/mtoohey31/crkbd-keymap ./keyboards/planck/k
 qmk compile -kb planck/light -km mtoohey31
 ```
 
-ghis keymap should also work on other planck versions, though it hasn't been tested on them.
+This keymap should also work on other planck versions, though it hasn't been tested on them.
