@@ -12,3 +12,9 @@ qmk compile -kb planck/light -km mtoohey31
 Then follow the instructions in the QMK docs to flash the keymap to your board, and be sure to select the correct MCU, for the Planck Light it's the AT90USB1286.
 
 This keymap should also work on other planck versions, though it hasn't been tested on them.
+
+Optionally, if you'd like to disable the LED in the middle of where the 2U spacebar would be (that has a nasty habit of shining through directly between the split spacebar), you can run the following before compiling the firmware:
+
+```bash
+git apply keyboards/planck/keymaps/mtoohey31/no-space-led.patch
+```

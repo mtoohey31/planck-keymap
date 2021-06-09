@@ -1,0 +1,13 @@
+diff --git a/keyboards/planck/light/light.c b/keyboards/planck/light/light.c
+index 896ec4458..c19661668 100644
+--- a/keyboards/planck/light/light.c
++++ b/keyboards/planck/light/light.c
+@@ -68,7 +68,7 @@ const is31_led g_is31_leds[DRIVER_LED_TOTAL] = {
+     {0, C9_12, C8_12, C7_12},
+     {0, C9_13, C8_13, C7_13},
+     {0, C9_14, C8_14, C7_14},
+-    {0, C9_15, C8_15, C6_14}, // middle 2u switch
++    /* {0, C9_15, C8_15, C6_14}, // middle 2u switch */
+     {1, C9_4,  C8_4,  C7_4},
+     {1, C9_5,  C8_5,  C7_5},
+     {1, C9_6,  C8_6,  C7_6},
