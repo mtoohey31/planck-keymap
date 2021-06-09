@@ -19,7 +19,7 @@
 
 enum planck_layers { _QWERTY, _SHIFT, _DOUBLESHIFT, _NAV, _NUM, _FPS, _LEAGUE, _PLOVER, _SETTINGS };
 
-enum custom_keycodes { PLOVER, EXT_PLV, KC_MLBRC, KC_MRBRC };
+enum custom_keycodes { EXT_PLV, KC_MLBRC, KC_MRBRC };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -73,25 +73,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_PLOVER] = LAYOUT_planck_grid(
+    XXXXXXX, KC_Q, KC_W,   KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
+    TG(_PLOVER), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,
-    XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
-    XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    KC_V,    KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
 [_SETTINGS] = LAYOUT_planck_grid(
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,   XXXXXXX, RGB_MOD, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI,  XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(_FPS), TO(_LEAGUE), RGB_RMOD, RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, PLOVER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(_PLOVER), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MAGIC_SWAP_LCTL_LGUI, MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX, RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 )
 
 };
-
-#ifdef AUDIO_ENABLE
-float plover_song[][2]    = SONG(PLOVER_SOUND);
-float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
-#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -139,31 +134,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
-        case PLOVER:
-            if (record->event.pressed) {
-#ifdef AUDIO_ENABLE
-                stop_all_notes();
-                PLAY_SONG(plover_song);
-#endif
-                layer_on(_PLOVER);
-                if (!eeconfig_is_enabled()) {
-                    eeconfig_init();
-                }
-                keymap_config.raw  = eeconfig_read_keymap();
-                keymap_config.nkro = 1;
-                eeconfig_update_keymap(keymap_config.raw);
-            }
-            return false;
-            break;
-        case EXT_PLV:
-            if (record->event.pressed) {
-#ifdef AUDIO_ENABLE
-                PLAY_SONG(plover_gb_song);
-#endif
-                layer_off(_PLOVER);
-            }
-            return false;
-            break;
         default:
             return true;
     }
@@ -208,43 +178,6 @@ void encoder_update(bool clockwise) {
             tap_code(KC_PGUP);
 #endif
         }
-    }
-}
-#endif
-
-#ifdef DIP_SWITCH_ENABLE
-void dip_switch_update_user(uint8_t index, bool active) {
-    switch (index) {
-        case 0: {
-#ifdef AUDIO_ENABLE
-            static bool play_sound = false;
-#endif
-            if (active) {
-#ifdef AUDIO_ENABLE
-                if (play_sound) {
-                    PLAY_SONG(plover_song);
-                }
-#endif
-                layer_on(_SETTINGS);
-            } else {
-#ifdef AUDIO_ENABLE
-                if (play_sound) {
-                    PLAY_SONG(plover_gb_song);
-                }
-#endif
-                layer_off(_SETTINGS);
-            }
-#ifdef AUDIO_ENABLE
-            play_sound = true;
-#endif
-            break;
-        }
-        case 1:
-            if (active) {
-                muse_mode = true;
-            } else {
-                muse_mode = false;
-            }
     }
 }
 #endif
