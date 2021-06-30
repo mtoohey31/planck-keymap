@@ -151,6 +151,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_O);
                 unregister_code(KC_L);
             }
+            return false;
+            break;
         default:
             return true;
     }
