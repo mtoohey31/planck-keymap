@@ -17,45 +17,31 @@
 #include QMK_KEYBOARD_H
 /* #include "muse.h" */
 
-enum planck_layers { _QWERTY, _SHIFT, _DOUBLESHIFT, _NAV, _NUM, _FPS, _LEAGUE, _PLOVER, _SETTINGS };
+enum planck_layers { _QWERTY, _NAV, _NUM, _FPS, _LEAGUE, _PLOVER, _SETTINGS };
 
-enum custom_keycodes { TG_PLV, KC_MLBRC, KC_MRBRC };
+enum custom_keycodes { TG_PLV };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT_planck_grid(
-    KC_MLBRC, KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MRBRC,
+    KC_LPRN, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_RPRN,
     LT(_SETTINGS,KC_BSLS), KC_A, KC_S, KC_D, KC_F, KC_G,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    LM(_SHIFT, MOD_LSFT), KC_Z, KC_X, KC_C, KC_V, KC_B,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, LM(_SHIFT, MOD_LSFT),
-    XXXXXXX, XXXXXXX, XXXXXXX, LALT_T(KC_ESC), LGUI_T(KC_BSPC), LCTL_T(KC_DEL), LT(_NAV, KC_ENT), KC_SPC, LT(_NUM, KC_TAB), XXXXXXX, XXXXXXX, XXXXXXX
-),
-
-[_SHIFT] = LAYOUT_planck_grid(
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    MO(_DOUBLESHIFT), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, MO(_DOUBLESHIFT),
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-),
-
-[_DOUBLESHIFT] = LAYOUT_planck_grid(
-    _______, _______, _______, KC_EQL,  KC_PERC, KC_TILD, _______, _______, _______, _______, KC_PLUS, _______,
-    _______, KC_AT,   KC_AMPR, KC_DLR,  KC_CIRC, KC_GRV,  KC_MINS, _______, _______, _______, _______, _______,
-    LSFT_T(KC_CAPS), _______, _______, KC_APP, _______, _______, KC_HASH, KC_ASTR, _______, _______, KC_EXLM, RSFT_T(KC_CAPS),
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    _______, _______, _______, LALT_T(KC_ESC), LGUI_T(KC_BSPC), LCTL_T(KC_DEL), LT(_NAV, KC_ENT), KC_SPC, LT(_NUM, KC_TAB), _______, _______, _______
 ),
 
 [_NAV] = LAYOUT_planck_grid(
     _______, _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  _______, _______, _______, _______, _______, _______,
     _______, _______, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
 [_NUM] = LAYOUT_planck_grid(
-    KC_MLBRC, KC_F1,  KC_F2,   KC_F3,   KC_F4,   KC_TILD, KC_SLSH, KC_7,    KC_8,    KC_9,    KC_MINS, KC_MRBRC,
-    KC_LT,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_HASH, KC_ASTR, KC_4,    KC_5,    KC_6,    KC_PLUS, KC_GT,
-    _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PERC, KC_CIRC, KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
-    _______, _______, _______, _______, _______, _______, TG(_NUM), KC_0,   _______, _______, _______, _______
+    KC_LBRC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_TILD, KC_SLSH, KC_7,    KC_8,    KC_9,    KC_MINS, KC_RBRC,
+    _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_GRV,  KC_ASTR, KC_4,    KC_5,    KC_6,    KC_PLUS, KC_AMPR,
+    _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_HASH, KC_PERC, KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
+    _______, _______, _______, KC_CIRC, KC_AT,   KC_DLR,  DF(_NUM), KC_0,   DF(_QWERTY), _______, _______, _______
 ),
 
 [_FPS] = LAYOUT_planck_grid(
@@ -73,67 +59,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_PLOVER] = LAYOUT_planck_grid(
-    XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
-    TG_PLV, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    _______, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
+    TG_PLV,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    KC_V,    KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    _______, _______, _______, _______, KC_C,    KC_V,    KC_N,    KC_M,    _______, _______, _______, _______
 ),
 
 [_SETTINGS] = LAYOUT_planck_grid(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,   XXXXXXX, RGB_MOD, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(_FPS), TO(_LEAGUE), RGB_RMOD, RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG_PLV, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MAGIC_SWAP_LCTL_LGUI, MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX, RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    _______, _______, _______, _______, RESET,   _______, RGB_MOD, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI, _______,
+    _______, _______, _______, _______, TO(_FPS), TO(_LEAGUE), RGB_RMOD, RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD, _______,
+    _______, _______, _______, _______, TG_PLV, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, MAGIC_SWAP_LCTL_LGUI, MAGIC_UNSWAP_LCTL_LGUI, _______, RGB_TOG, _______, _______, _______, _______
 )
 
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_MLBRC:
-            if (record->event.pressed) {
-                if (IS_LAYER_ON(_DOUBLESHIFT)) {
-                    register_code(KC_LSFT);
-                    register_code(KC_LBRC);
-                    unregister_code(KC_LSFT);
-                } else if (keyboard_report->mods & IS_LAYER_ON(_SHIFT)) {
-                    unregister_code(KC_LSFT);
-                    register_code(KC_LBRC);
-                    register_code(KC_LSFT);
-                } else {
-                    register_code(KC_LSFT);
-                    register_code(KC_9);
-                    unregister_code(KC_LSFT);
-                }
-            } else {
-                unregister_code(KC_COMM);
-                unregister_code(KC_LBRC);
-                unregister_code(KC_9);
-            }
-            return false;
-            break;
-        case KC_MRBRC:
-            if (record->event.pressed) {
-                if (IS_LAYER_ON(_DOUBLESHIFT)) {
-                    register_code(KC_LSFT);
-                    register_code(KC_RBRC);
-                    unregister_code(KC_LSFT);
-                } else if (keyboard_report->mods & IS_LAYER_ON(_SHIFT)) {
-                    unregister_code(KC_LSFT);
-                    register_code(KC_RBRC);
-                    register_code(KC_LSFT);
-                } else {
-                    register_code(KC_LSFT);
-                    register_code(KC_0);
-                    unregister_code(KC_LSFT);
-                }
-            } else {
-                unregister_code(KC_DOT);
-                unregister_code(KC_RBRC);
-                unregister_code(KC_0);
-            }
-            return false;
-            break;
         case TG_PLV:
             if (record->event.pressed) {
             } else {
@@ -153,8 +95,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
-        default:
-            return true;
     }
     return true;
 }
