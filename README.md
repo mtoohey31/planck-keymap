@@ -5,7 +5,7 @@ This repository contains my [Planck Light](https://drop.com/buy/massdrop-x-olkb-
 To try this keymap out on your board, set up QMK firmware on your system as per the [guide](https://docs.qmk.fm/#/newbs_getting_started), then, while in the `qmk_firmware` directory, run the following commands:
 
 ```bash
-git submodule add https://github.com/mtoohey31/crkbd-keymap ./keyboards/planck/keymaps/mtoohey31
+git submodule add https://github.com/mtoohey31/planck-keymap ./keyboards/planck/keymaps/mtoohey31
 qmk compile -kb planck/light -km mtoohey31
 ```
 
