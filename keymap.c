@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_SETTINGS] = LAYOUT_planck_grid(
     _______, _______, _______, _______, RESET,   _______, RGB_MOD, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI, _______,
     _______, _______, _______, _______, TO(_FPS), TO(_LEAGUE), RGB_RMOD, RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD, _______,
-    _______, _______, _______, _______, TG_PLV, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, TG_PLV, _______, MAGIC_TOGGLE_NKRO, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, MAGIC_SWAP_LCTL_LGUI, MAGIC_UNSWAP_LCTL_LGUI, _______, RGB_TOG, _______, _______, _______, _______
 )
 
