@@ -17,7 +17,7 @@
 #include QMK_KEYBOARD_H
 /* #include "muse.h" */
 
-enum planck_layers { _QWERTY, _NAV, _NUM, _FPS, _LEAGUE, _PLOVER, _SETTINGS };
+enum planck_layers { _QWERTY, _NAV, _NUM, _FPS, _MOBA, _PLOVER, _SETTINGS };
 
 enum custom_keycodes { TG_PLV };
 
@@ -51,8 +51,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, KC_LALT, KC_SPC,  KC_LCTL, _______, _______, _______, _______, _______, _______
 ),
 
-[_LEAGUE] = LAYOUT_planck_grid(
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, _______, TG(_LEAGUE),
+[_MOBA] = LAYOUT_planck_grid(
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, _______, TG(_MOBA),
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, _______, _______, _______, _______, _______,
     KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, _______, _______, _______, _______, _______,
     _______, _______, _______, KC_LCTL, KC_SPC,  KC_B,    _______, _______, _______, _______, _______, _______
@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SETTINGS] = LAYOUT_planck_grid(
     _______, _______, _______, _______, RESET,   _______, RGB_MOD, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI, _______,
-    _______, _______, _______, _______, TO(_FPS), TO(_LEAGUE), RGB_RMOD, RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD, _______,
+    _______, _______, _______, _______, TO(_FPS), TO(_MOBA), RGB_RMOD, RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD, _______,
     _______, _______, _______, _______, TG_PLV, _______, MAGIC_TOGGLE_NKRO, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, MAGIC_SWAP_LCTL_LGUI, MAGIC_UNSWAP_LCTL_LGUI, _______, RGB_TOG, _______, _______, _______, _______
 )
